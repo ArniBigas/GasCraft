@@ -53,9 +53,9 @@ public void init(FMLInitializationEvent event) {
 	System.out.println("GasCraft Initialitzated - DM");
 	
 	//Making Blocks and Items
-	GasPipe = new BlockGasPipe(2200);
+	GasPipe = new BlockGasPipe(2200).setBlockName("GasPipe");
 	GasWrench = new Wrench(22200).setIconIndex(1).setItemName("GasWrench");	
-	AirtightChamber = new BlockPipeMaker(2201);
+	AirtightChamber = new BlockPipeMaker(2201).setBlockName("Chamber");
 	
 	//Giving it a name
 	LanguageRegistry.addName(GasPipe, "Gas Pipe");
