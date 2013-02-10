@@ -1,5 +1,7 @@
-package TheArni.GasCraft;
+package TheArni.GasCraft.GUI;
 
+import TheArni.GasCraft.Blocks.PipeMaker;
+import TheArni.GasCraft.Blocks.PipeMakerContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

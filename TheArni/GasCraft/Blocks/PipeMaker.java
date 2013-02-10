@@ -1,4 +1,4 @@
-package TheArni.GasCraft;
+package TheArni.GasCraft.Blocks;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -12,7 +12,7 @@ public class PipeMaker extends TileEntity implements IInventory{
 	private ItemStack[] inventory;
     
     public PipeMaker(){
-            this.inventory = new ItemStack[27];
+            this.inventory = new ItemStack[3];
     }
    
     @Override

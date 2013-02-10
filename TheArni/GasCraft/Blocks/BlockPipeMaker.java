@@ -1,6 +1,8 @@
-package TheArni.GasCraft;
+package TheArni.GasCraft.Blocks;
 
 import java.util.Random;
+
+import TheArni.GasCraft.GasCraft;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -8,7 +10,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.*;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -69,7 +70,7 @@ public class BlockPipeMaker extends BlockContainer {
                         item.setTagCompound((NBTTagCompound) item.getTagCompound().copy());
                 }
 
-                float factor = 0.5F;
+                float factor = 0.1F;
                
                 entity_item.motionX = rand.nextGaussian() * factor;
                 entity_item.motionY = rand.nextGaussian() * factor + 0.2F;
@@ -88,8 +89,8 @@ public class BlockPipeMaker extends BlockContainer {
 	public int getBlockTextureFromSide(int par1)
 	{
 	    switch(par1){
-	    case 1: return 2;
-	    default: return 1;
+	    case 1: return 1;
+	    default: return 0;
 	    }
 	}
 }

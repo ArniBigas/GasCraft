@@ -2,12 +2,19 @@ package TheArni.GasCraft;
 
 import java.util.Random;
 
+import TheArni.GasCraft.Blocks.BlockPipeMaker;
+import TheArni.GasCraft.Blocks.PipeMaker;
+import TheArni.GasCraft.GUI.GuiHandler;
+import TheArni.GasCraft.Pipes.BlockGasPipe_softCopper;
+import TheArni.GasCraft.Pipes.GasPipe_softCopper;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.*;
 import net.minecraft.item.*;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.client.registry.RenderingRegistry;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.*;
@@ -24,63 +31,67 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 public class GasCraft {
-	
-@Instance
-public static GasCraft instance = new GasCraft();
 
-//Declaring GUIs
-private GuiHandler guiHandler = new GuiHandler();
+	@Instance
+	public static GasCraft instance = new GasCraft();
 
-@SidedProxy(clientSide="TheArni.GasCraft.ClientProxy", serverSide="TheArni.GasCraft.CommonProxy")
-public static CommonProxy proxy;
+	//Declaring GUIs
+	private GuiHandler guiHandler = new GuiHandler();
 
-//Creating the creative tab
-public static CreativeTabs gasTab = new GasTab(CreativeTabs.getNextID(),"GasTab"); //Our custom creative tab's object
+	@SidedProxy(clientSide="TheArni.GasCraft.ClientProxy", serverSide="TheArni.GasCraft.CommonProxy")
+	public static CommonProxy proxy;
 
-//Declaring blocks and items
-public static Block GasPipe;
-public static Block AirtightChamber;
-public static Item GasWrench;
+	//Creating the creative tab
+	public static CreativeTabs gasTab = new GasTab(CreativeTabs.getNextID(),"GasTab"); //Our custom creative tab's object
 
-@PreInit
-public void preInit(FMLPreInitializationEvent event) {
-	System.out.println("Initialitzating GasCraft - DM");
-}
-//Blocks ID used 2200 - 2250
-//Item ID used 22200 - 22250
-@Init
-public void init(FMLInitializationEvent event) {
-	System.out.println("GasCraft Initialitzated - DM");
-	
-	//Making Blocks and Items
-	GasPipe = new BlockGasPipe(2200).setBlockName("GasPipe");
-	GasWrench = new Wrench(22200).setIconIndex(1).setItemName("GasWrench");	
-	AirtightChamber = new BlockPipeMaker(2201).setBlockName("Chamber");
-	
-	//Giving it a name
-	LanguageRegistry.addName(GasPipe, "Gas Pipe");
-	LanguageRegistry.addName(GasWrench, "Wrench");
-	LanguageRegistry.addName(AirtightChamber, "Airtight Chamber");
-	
-	//Registering things
-	GameRegistry.registerBlock(GasPipe, "Gas Pipe");
-	GameRegistry.registerBlock(AirtightChamber, "AChamber");
-	GameRegistry.registerTileEntity(PipeMaker.class, "PipeMaker");
-	
-	//General INTERNAL Settings
-	MinecraftForge.setBlockHarvestLevel(GasPipe, "wrench", 0);
-	MinecraftForge.setToolClass(GasWrench, "wrench", 0);
-	
-	//Rendering Textures
-	proxy.registerRenderThings();
-	
-	//RegisterGUIs	
-	NetworkRegistry.instance().registerGuiHandler(this, guiHandler);
-	
-}
+	//Declaring blocks and items
+	public static Block GasPipe;
+	public static Block AirtightChamber;
+	public static Item GasWrench;
 
-@PostInit
-public static void postInit(FMLPostInitializationEvent event) {
+	//Declaring renderers IDs
+	public static int SoftCopperPipeRenderId;
 
-}
+	@PreInit
+	public void preInit(FMLPreInitializationEvent event) {
+		System.out.println("Initialitzating GasCraft - DM");
+	}
+	//Blocks ID used 2200 - 2250
+	//Item ID used 22200 - 22250
+	@Init
+	public void init(FMLInitializationEvent event) {
+		System.out.println("GasCraft Initialitzated - DM");
+
+		//Making Blocks and Items
+		GasPipe = new BlockGasPipe_softCopper(2200).setBlockName("GasPipe");
+		GasWrench = new Wrench(22200).setIconIndex(1).setItemName("GasWrench");	
+		AirtightChamber = new BlockPipeMaker(2201).setBlockName("Chamber");
+
+		//Giving it a name
+		LanguageRegistry.addName(GasPipe, "Gas Pipe");
+		LanguageRegistry.addName(GasWrench, "Wrench");
+		LanguageRegistry.addName(AirtightChamber, "Airtight Chamber");
+
+		//Registering things
+		GameRegistry.registerBlock(GasPipe, "Gas Pipe");
+		GameRegistry.registerBlock(AirtightChamber, "AChamber");
+		GameRegistry.registerTileEntity(PipeMaker.class, "PipeMaker");
+		GameRegistry.registerTileEntity(GasPipe_softCopper.class, "Pipe_SoftCopper");
+
+		//General INTERNAL Settings
+		MinecraftForge.setBlockHarvestLevel(GasPipe, "wrench", 0);
+		MinecraftForge.setToolClass(GasWrench, "wrench", 0);
+
+		//RegisterGUIs	
+		NetworkRegistry.instance().registerGuiHandler(this, guiHandler);
+
+		//Preload Textures and stuff
+		proxy.initRenderingAndTextures();
+
+	}
+
+	@PostInit
+	public static void postInit(FMLPostInitializationEvent event) {
+
+	}
 }

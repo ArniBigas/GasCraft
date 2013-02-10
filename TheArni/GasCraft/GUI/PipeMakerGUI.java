@@ -1,6 +1,9 @@
-package TheArni.GasCraft;
+package TheArni.GasCraft.GUI;
 
 import org.lwjgl.opengl.GL11;
+
+import TheArni.GasCraft.Blocks.PipeMaker;
+import TheArni.GasCraft.Blocks.PipeMakerContainer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
@@ -15,7 +18,7 @@ public class PipeMakerGUI extends GuiContainer{
         @Override
         protected void drawGuiContainerForegroundLayer(int i, int j){
        
-                fontRenderer.drawString("PipeMaker", 6, 6, 0x000000);
+                fontRenderer.drawString("Aithight Chamber", 6, 6, 0x000000);
                 fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 6, ySize - 96 , 0x000000);
         }
        
