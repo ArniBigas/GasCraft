@@ -17,7 +17,7 @@ public class BlockGasPipe_softCopper extends BlockContainer {
 		this.setCreativeTab(GasCraft.gasTab);
 		this.setHardness(0.05F);
 		this.setStepSound(soundStoneFootstep);
-		this.setBlockBounds(0F, 0F, 0.365F, 1F, 0.1975F, 0.635F);
+		this.setBlockBounds(0F, 0F, 0F, 1F, 0.1975F, 1F);
 	}
 	public boolean renderAsNormalBlock(){
 		return false;
@@ -40,6 +40,11 @@ public class BlockGasPipe_softCopper extends BlockContainer {
 	{
 		return false;
 	}
+	
+	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+    {
+        return par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4);
+    }
 	
 	@Override
 	public TileEntity createNewTileEntity(World world){
